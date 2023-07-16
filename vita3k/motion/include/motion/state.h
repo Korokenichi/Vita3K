@@ -18,18 +18,9 @@
 #pragma once
 
 #include <motion/motion.h>
-#include <motion/motion_input.h>
 
 #include <SDL_gamecontroller.h>
 
-#include <mutex>
-
 struct MotionState {
-    std::mutex mutex;
-    MotionInput motion_data;
-    uint32_t last_counter = 0;
-    uint64_t last_gyro_timestamp = 0;
-    uint64_t last_accel_timestamp = 0;
-
-    bool is_sampling = false;
+    // Put variable used by app here
 };

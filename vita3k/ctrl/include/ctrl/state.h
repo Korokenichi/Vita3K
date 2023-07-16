@@ -26,7 +26,6 @@
 #include <array>
 #include <map>
 #include <memory>
-#include <mutex>
 
 struct _SDL_GameController;
 
@@ -36,8 +35,6 @@ typedef std::shared_ptr<_SDL_Haptic> HapticPtr;
 struct Controller {
     GameControllerPtr controller;
     int port;
-    bool has_accel;
-    bool has_gyro;
 };
 
 struct ControllerBinding {
@@ -82,10 +79,8 @@ constexpr std::array<ControllerBinding, 15> controller_bindings_ext = { {
 typedef std::map<SDL_JoystickGUID, Controller> ControllerList;
 
 struct CtrlState {
-    std::mutex mutex;
     ControllerList controllers;
     int controllers_num = 0;
-    bool has_motion_support = false;
     const char *controllers_name[SCE_CTRL_MAX_WIRELESS_NUM];
     bool free_ports[SCE_CTRL_MAX_WIRELESS_NUM] = { true, true, true, true };
     SceCtrlPadInputMode input_mode = SCE_CTRL_MODE_DIGITAL;
